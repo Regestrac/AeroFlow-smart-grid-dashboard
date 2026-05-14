@@ -1,6 +1,6 @@
 import React from 'react';
 import { clsx } from 'clsx';
-import { Activity, Thermometer, RotateCcw } from 'lucide-react';
+import { Activity, Thermometer, RotateCcw, Power } from 'lucide-react';
 import { useGridStore } from '../../store/useGridStore';
 import type { Turbine } from '../../engine/types';
 import { GlassCard } from '../ui/GlassCard';
@@ -95,7 +95,6 @@ interface TurbineCardProps {
 
 export const TurbineCard: React.FC<TurbineCardProps> = ({ turbine }) => {
   const toggleShutdown = useGridStore((state) => state.toggleTurbineShutdown);
-  const toggleMaintenance = useGridStore((state) => state.toggleMaintenanceMode);
 
   return (
     <GlassCard
@@ -163,31 +162,18 @@ export const TurbineCard: React.FC<TurbineCardProps> = ({ turbine }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 pt-3 border-t border-surface-border mt-2">
+      <div className="grid grid-cols-1 gap-3 pt-3 border-t border-surface-border mt-2">
         <button
           onClick={() => toggleShutdown(turbine.id)}
           className={clsx(
-            "flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all duration-200 border",
+            "flex items-center justify-center gap-2 p-1 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all duration-200 border",
             turbine.isShutDown
               ? "bg-critical-color text-white border-critical-color shadow-[0_0_15px_rgba(239,68,68,0.4)]"
               : "bg-surface-color text-text-secondary border-surface-border hover:border-critical-color/50 hover:text-critical-color"
           )}
         >
-          <RotateCcw className={clsx("w-3.5 h-3.5", turbine.isShutDown && "animate-spin")} />
+          {turbine.isShutDown ? <RotateCcw className="w-4 h-4" /> : <Power className="w-4 h-4" />}
           {turbine.isShutDown ? 'Restart' : 'Shutdown'}
-        </button>
-
-        <button
-          onClick={() => toggleMaintenance(turbine.id)}
-          className={clsx(
-            "flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all duration-200 border",
-            turbine.maintenanceMode
-              ? "bg-accent-color text-white border-accent-color shadow-[0_0_15px_rgba(0,212,255,0.4)]"
-              : "bg-surface-color text-text-secondary border-surface-border hover:border-accent-color/50 hover:text-accent-color"
-          )}
-        >
-          <Activity className="w-3.5 h-3.5" />
-          {turbine.maintenanceMode ? 'Online' : 'Service'}
         </button>
       </div>
 
