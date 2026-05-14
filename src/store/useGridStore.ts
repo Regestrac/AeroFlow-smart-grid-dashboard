@@ -9,7 +9,6 @@ interface GridStore {
   setWindSpeed: (speed: number) => void;
   setBladeAngle: (angle: number) => void;
   toggleTurbineShutdown: (id: string) => void;
-  toggleMaintenanceMode: (id: string) => void;
   applyPreset: (preset: 'calm' | 'storm' | 'peak') => void;
   tick: () => void;
 }
@@ -36,13 +35,6 @@ export const useGridStore = create<GridStore>((set, get) => ({
   toggleTurbineShutdown: (id) => {
     const { engine } = get();
     engine.toggleShutdown(id);
-    const newState = engine.tick();
-    set({ gridState: newState });
-  },
-
-  toggleMaintenanceMode: (id) => {
-    const { engine } = get();
-    engine.toggleMaintenance(id);
     const newState = engine.tick();
     set({ gridState: newState });
   },
