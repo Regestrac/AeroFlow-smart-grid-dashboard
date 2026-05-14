@@ -62,8 +62,8 @@ export const useGridStore = create<GridStore>((set, get) => ({
         angle = 10;
         break;
       case 'peak':
-        wind = 18;
-        angle = 60;
+        wind = 14;
+        angle = 15;
         break;
     }
 
