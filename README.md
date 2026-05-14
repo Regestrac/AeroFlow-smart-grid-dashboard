@@ -197,8 +197,8 @@ Pure, testable functions for calculations:
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
-   cd "AeroFlow Smart Grid Dashboard"
+   git clone https://github.com/Regestrac/AeroFlow-smart-grid-dashboard.git
+   cd "AeroFlow-smart-grid-dashboard"
    ```
 
 2. **Install dependencies**:
